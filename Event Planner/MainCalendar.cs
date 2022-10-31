@@ -15,13 +15,13 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.Header;
 
 namespace Event_Planner
 {
-    public partial class Form1 : Form
+    public partial class MainCalendar : Form
     {
         int month, year;
         ArrayList eventCollection=new ArrayList(); //JUST DID A SIMPLE INTERNAL INSTANCE ARRAYLIST ( SHOULD BE SQL FOR FURTHER DEVELOPMENT )
         public static int static_month, static_year;
        
-        public Form1()
+        public MainCalendar()
         {
             InitializeComponent();
             

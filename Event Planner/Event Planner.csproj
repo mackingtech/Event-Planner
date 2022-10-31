@@ -46,13 +46,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
-    <Compile Include="Class2.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="EventClass.cs" />
+    <Compile Include="CollectionClass.cs" />
+    <Compile Include="MainCalendar.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="MainCalendar.Designer.cs">
+      <DependentUpon>MainCalendar.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -68,8 +68,8 @@
     <Compile Include="UserControlDays.Designer.cs">
       <DependentUpon>UserControlDays.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="MainCalendar.resx">
+      <DependentUpon>MainCalendar.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
