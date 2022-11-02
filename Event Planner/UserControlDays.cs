@@ -14,6 +14,7 @@ namespace Event_Planner
     {
         public static string static_day;
         public String description;
+        
         public UserControlDays()
         {
             InitializeComponent();
@@ -31,12 +32,14 @@ namespace Event_Planner
         {
            
         }
-        public void eventContain(String title)
+        public String eventContain(String title)
         {
             if (String.IsNullOrEmpty(eventContainer.Text))
             eventContainer.Text = title;
             else
                 eventContainer2.Text = title;
+
+            return eventContainer.Text;
         }
 
         private void UserControlDays_Click(object sender, EventArgs e)
@@ -52,10 +55,12 @@ namespace Event_Planner
         private void eventContainer_MouseHover(object sender, EventArgs e)
         {
             toolTip1.SetToolTip(eventContainer, description);
+
         }
 
         private void eventContainer_Click(object sender, EventArgs e)
         {
+           
             
 
         }

@@ -32,6 +32,7 @@ namespace Event_Planner
         {
             displaDays();
             createEventPanel.Hide();
+            
         }
         private void displaDays()
         {
@@ -81,6 +82,8 @@ namespace Event_Planner
             createEventPanel.Show();
             
             createButton.Hide();
+
+           
         }
 
         //When you click at a certain date in the month calendar in the create event section it stores it at the eventDate
@@ -156,6 +159,7 @@ namespace Event_Planner
             displaDays();
             createEventPanel.Hide();
             clear();
+            populateDataGrid();
         }
 
         private void btnnext_Click(object sender, EventArgs e)
@@ -200,6 +204,13 @@ namespace Event_Planner
 
            
         }
+
+        private void deleteButton_Click(object sender, EventArgs e)
+        {
+            eventCollection.Remove(titleComparator(deleteTxtBox.Text));
+            populateDataGrid();
+        }
+
         private void clear()
         {
             titleTextBox.Clear();
@@ -208,6 +219,81 @@ namespace Event_Planner
             amPm.ResetText();
             timePicker.ResetText();
         }
+
+        private void showAllButton_Click(object sender, EventArgs e)
+        {
+            deletePanel.Show();
+        }
+
+        private void deleteCancelButton_Click(object sender, EventArgs e)
+        {
+            deletePanel.Hide();
+            daycontainer.Controls.Clear();
+            populateContainer();
+        }
+
+        private void populateDataGrid()
+        {
+            dataGridView1.Rows.Clear();
+            foreach (Event item in eventCollection)
+            {
+                int i = 0;
+                String title = item.getTitle();
+                String description = item.getDescription();
+                String date = item.getStartDate();
+                dataGridView1.Rows.Add(title, description, date);
+                
+            }
+            
+        }
+
+       private Event titleComparator(String x)
+        {
+            Event evnt=null;
+            foreach (Event item in eventCollection)
+            {
+                if (x == item.getTitle()) 
+                {
+                    evnt= item;
+                }
+            }
+            return evnt;
+        }
+
+        private void populateContainer()
+        {
+            DateTime startofthemonth = new DateTime(year, month, 1);
+
+            int days = DateTime.DaysInMonth(year, month);
+
+            int dayoftheweek = Convert.ToInt32(startofthemonth.DayOfWeek.ToString("d")) + 1;
+
+            for (int i = 1; i < dayoftheweek; i++)
+            {
+                UserControlBlank ucblank = new UserControlBlank();
+                daycontainer.Controls.Add(ucblank);
+            }
+            for (int i = 1; i <= days; i++)
+            {
+                UserControlDays ucdays = new UserControlDays();
+                ucdays.days(i);
+                String format = month + "/" + i + "/" + year;//FORMAT VALUE OF THE DATE SO IT CAN BE USED AS STRING COMPARATOR FOR THE LOOP BELOW
+                foreach (Event item in eventCollection)
+                {
+
+                    String x = item.getStartDate();
+                    if (x == format)
+                    {
+                        ucdays.eventContain(item.getTitle());
+                        ucdays.hoverDescription(item.getDescription() + " @ " + item.getTime());
+                    }
+                }
+                daycontainer.Controls.Add(ucdays);
+            }
+        }
     }
+
+     
     }
+    
 

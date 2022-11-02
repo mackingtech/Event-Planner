@@ -53,7 +53,19 @@
             this.label7 = new System.Windows.Forms.Label();
             this.LBDATE = new System.Windows.Forms.Label();
             this.createButton = new System.Windows.Forms.Button();
+            this.deletePanel = new System.Windows.Forms.Panel();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.deleteLabel = new System.Windows.Forms.Label();
+            this.deleteTxtBox = new System.Windows.Forms.TextBox();
+            this.deleteButton = new System.Windows.Forms.Button();
+            this.deleteCancelButton = new System.Windows.Forms.Button();
+            this.showAllButton = new System.Windows.Forms.Button();
             this.createEventPanel.SuspendLayout();
+            this.deletePanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // daycontainer
@@ -80,7 +92,7 @@
             this.createEventPanel.Controls.Add(this.eventDescriptionLabel);
             this.createEventPanel.Controls.Add(this.eventTitleLabel);
             this.createEventPanel.Controls.Add(this.titleTextBox);
-            this.createEventPanel.Location = new System.Drawing.Point(243, 34);
+            this.createEventPanel.Location = new System.Drawing.Point(12, 25);
             this.createEventPanel.Name = "createEventPanel";
             this.createEventPanel.Size = new System.Drawing.Size(408, 449);
             this.createEventPanel.TabIndex = 8;
@@ -320,11 +332,103 @@
             this.createButton.UseVisualStyleBackColor = true;
             this.createButton.Click += new System.EventHandler(this.createButton_Click);
             // 
-            // Form1
+            // deletePanel
+            // 
+            this.deletePanel.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.deletePanel.Controls.Add(this.deleteCancelButton);
+            this.deletePanel.Controls.Add(this.deleteButton);
+            this.deletePanel.Controls.Add(this.deleteTxtBox);
+            this.deletePanel.Controls.Add(this.deleteLabel);
+            this.deletePanel.Controls.Add(this.dataGridView1);
+            this.deletePanel.Location = new System.Drawing.Point(426, 25);
+            this.deletePanel.Name = "deletePanel";
+            this.deletePanel.Size = new System.Drawing.Size(439, 361);
+            this.deletePanel.TabIndex = 10;
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column1,
+            this.Column2,
+            this.Column3});
+            this.dataGridView1.Location = new System.Drawing.Point(7, 9);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(421, 300);
+            this.dataGridView1.TabIndex = 0;
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "Event Title";
+            this.Column1.Name = "Column1";
+            // 
+            // Column2
+            // 
+            this.Column2.HeaderText = "Description";
+            this.Column2.Name = "Column2";
+            this.Column2.Width = 180;
+            // 
+            // Column3
+            // 
+            this.Column3.HeaderText = "Date";
+            this.Column3.Name = "Column3";
+            // 
+            // deleteLabel
+            // 
+            this.deleteLabel.AutoSize = true;
+            this.deleteLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.deleteLabel.Location = new System.Drawing.Point(17, 327);
+            this.deleteLabel.Name = "deleteLabel";
+            this.deleteLabel.Size = new System.Drawing.Size(97, 20);
+            this.deleteLabel.TabIndex = 1;
+            this.deleteLabel.Text = "Enter Title:";
+            // 
+            // deleteTxtBox
+            // 
+            this.deleteTxtBox.Location = new System.Drawing.Point(120, 327);
+            this.deleteTxtBox.Name = "deleteTxtBox";
+            this.deleteTxtBox.Size = new System.Drawing.Size(141, 20);
+            this.deleteTxtBox.TabIndex = 2;
+            // 
+            // deleteButton
+            // 
+            this.deleteButton.Location = new System.Drawing.Point(267, 322);
+            this.deleteButton.Name = "deleteButton";
+            this.deleteButton.Size = new System.Drawing.Size(67, 25);
+            this.deleteButton.TabIndex = 0;
+            this.deleteButton.Text = "DELETE";
+            this.deleteButton.UseVisualStyleBackColor = true;
+            this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
+            // 
+            // deleteCancelButton
+            // 
+            this.deleteCancelButton.Location = new System.Drawing.Point(340, 322);
+            this.deleteCancelButton.Name = "deleteCancelButton";
+            this.deleteCancelButton.Size = new System.Drawing.Size(75, 25);
+            this.deleteCancelButton.TabIndex = 3;
+            this.deleteCancelButton.Text = "Cancel";
+            this.deleteCancelButton.UseVisualStyleBackColor = true;
+            this.deleteCancelButton.Click += new System.EventHandler(this.deleteCancelButton_Click);
+            // 
+            // showAllButton
+            // 
+            this.showAllButton.Location = new System.Drawing.Point(126, 493);
+            this.showAllButton.Name = "showAllButton";
+            this.showAllButton.Size = new System.Drawing.Size(108, 23);
+            this.showAllButton.TabIndex = 11;
+            this.showAllButton.Text = "Show All Events";
+            this.showAllButton.UseVisualStyleBackColor = true;
+            this.showAllButton.Click += new System.EventHandler(this.showAllButton_Click);
+            // 
+            // MainCalendar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(925, 528);
+            this.Controls.Add(this.showAllButton);
+            this.Controls.Add(this.deletePanel);
             this.Controls.Add(this.createEventPanel);
             this.Controls.Add(this.createButton);
             this.Controls.Add(this.LBDATE);
@@ -340,12 +444,15 @@
             this.Controls.Add(this.daycontainer);
             this.Cursor = System.Windows.Forms.Cursors.Hand;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "Form1";
+            this.Name = "MainCalendar";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.createEventPanel.ResumeLayout(false);
             this.createEventPanel.PerformLayout();
+            this.deletePanel.ResumeLayout(false);
+            this.deletePanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -378,6 +485,16 @@
         private System.Windows.Forms.Button saveButton;
         private System.Windows.Forms.ComboBox amPm;
         private System.Windows.Forms.ComboBox timePicker;
+        private System.Windows.Forms.Panel deletePanel;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
+        private System.Windows.Forms.Button deleteCancelButton;
+        private System.Windows.Forms.Button deleteButton;
+        private System.Windows.Forms.TextBox deleteTxtBox;
+        private System.Windows.Forms.Label deleteLabel;
+        private System.Windows.Forms.Button showAllButton;
     }
 }
 

@@ -9,23 +9,16 @@ namespace Event_Planner
 {
     internal class eventCollection
     {
-        String key;
+        String description, title, date;
        
-        public eventCollection(String label)
+        public eventCollection(Event evnt)
         {
-            ArrayList eventsCollection=new ArrayList();
+            this.description=evnt.getDescription();
+            this.title=evnt.getTitle();
+            this.date = evnt.getStartDate();
             
             
         }
-        public void addEvent(Event events)
-        {
-            
-        }
-
         
-        public void getEvent(String containing) 
-        {
-            
-        }
     }
 }
