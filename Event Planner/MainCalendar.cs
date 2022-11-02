@@ -32,7 +32,7 @@ namespace Event_Planner
         {
             displaDays();
             createEventPanel.Hide();
-            
+            deletePanel.Hide();
         }
         private void displaDays()
         {
@@ -222,7 +222,16 @@ namespace Event_Planner
 
         private void showAllButton_Click(object sender, EventArgs e)
         {
-            deletePanel.Show();
+            if (deletePanel.Visible)
+            {
+                deletePanel.Hide();
+                daycontainer.Controls.Clear();
+                populateContainer();
+            }
+            else
+                deletePanel.Show();
+
+
         }
 
         private void deleteCancelButton_Click(object sender, EventArgs e)
