@@ -24,7 +24,7 @@ namespace Event_Planner
         public MainCalendar()
         {
             InitializeComponent();
-            
+            //calendarDesigner();
         }
 
 
@@ -47,34 +47,8 @@ namespace Event_Planner
             static_month = month;
             static_year = year;
 
-            DateTime startofthemonth = new DateTime(year, month, 1);
+            populateContainer();
             
-            int days = DateTime.DaysInMonth(year, month);
-
-            int dayoftheweek = Convert.ToInt32(startofthemonth.DayOfWeek.ToString("d")) + 1;
-
-            for (int i = 1; i < dayoftheweek; i++)
-            {
-                UserControlBlank ucblank = new UserControlBlank();
-                daycontainer.Controls.Add(ucblank);
-            }
-            for (int i = 1;i<= days;i++)
-            {
-                UserControlDays ucdays = new UserControlDays();
-                ucdays.days(i);
-                String format = month + "/" + i + "/" + year;//FORMAT VALUE OF THE DATE SO IT CAN BE USED AS STRING COMPARATOR FOR THE LOOP BELOW
-                foreach (Event item in eventCollection)
-                {
-
-                    String x = item.getStartDate();
-                    if (x == format)
-                    {
-                        ucdays.eventContain(item.getTitle());
-                        ucdays.hoverDescription(item.getDescription() + " @ " + item.getTime());
-                    }
-                }
-                daycontainer.Controls.Add(ucdays);
-            }
         }
 
         private void createButton_Click(object sender, EventArgs e)
@@ -94,6 +68,7 @@ namespace Event_Planner
         //cancel button reloads the calendar
         private void cancelButton_Click(object sender, EventArgs e)
         {
+            daycontainer.Controls.Clear();
             clear();
             createEventPanel.Hide();
             displaDays();
@@ -111,41 +86,18 @@ namespace Event_Planner
             daycontainer.Controls.Clear();
             //previous month
             month--;
+            if (month == 0)
+            {
+                month = 12;
+                year--;
+            }
             static_month = month;
             static_year = year;
             String monthname = DateTimeFormatInfo.CurrentInfo.GetMonthName(month);
             LBDATE.Text = monthname + " " + year;
 
-            
-            DateTime startofthemonth = new DateTime(year, month, 1);
-            // days of the month
-            int days = DateTime.DaysInMonth(year, month);
-
-            int dayoftheweek = Convert.ToInt32(startofthemonth.DayOfWeek.ToString("d")) + 1;
-
-            for (int i = 1; i < dayoftheweek; i++)
-            {
-                UserControlBlank ucblank = new UserControlBlank();
-                daycontainer.Controls.Add(ucblank);
-            }
-            for (int i = 1; i <= days; i++)
-            {
-                UserControlDays ucdays = new UserControlDays();
-                ucdays.days(i);
-                String format = month + "/" + i + "/" + year;
-                foreach (Event item in eventCollection) 
-                {
-                    
-                    String x = item.getStartDate();
-                    if (x == format)
-                    {
-                        ucdays.eventContain(item.getTitle());
-                        ucdays.hoverDescription(item.getDescription()+ " @ " + item.getTime());
-                    }
-                }
-                    
-                daycontainer.Controls.Add(ucdays);
-            }
+            populateContainer();
+           
         }
 
         private void saveButton_Click(object sender, EventArgs e)
@@ -168,41 +120,19 @@ namespace Event_Planner
             daycontainer.Controls.Clear();
             //next month
             month++;
+            if (month == 13)
+            {
+                month = 1;
+                year++;
+            }
             static_month = month;
             static_year = year;
             String monthname = DateTimeFormatInfo.CurrentInfo.GetMonthName(month);
             LBDATE.Text = monthname + " " + year;
 
-            DateTime startofthemonth = new DateTime(year, month, 1);
-            // days of the month
-            int days = DateTime.DaysInMonth(year, month);
+            populateContainer();
 
-            int dayoftheweek = Convert.ToInt32(startofthemonth.DayOfWeek.ToString("d")) + 1;
-
-            for (int i = 1; i < dayoftheweek; i++)
-            {
-                UserControlBlank ucblank = new UserControlBlank();
-                daycontainer.Controls.Add(ucblank);
-            }
-            for (int i = 1; i <= days; i++)
-            {
-                UserControlDays ucdays = new UserControlDays();
-                ucdays.days(i);
-                String format = month + "/" + i + "/" + year; //FORMAT VALUE OF THE DATE SO IT CAN BE USED AS STRING COMPARATOR FOR THE LOOP BELOW
-                foreach (Event item in eventCollection)
-                {
-
-                    String x = item.getStartDate();
-                    if (x == format)
-                    {
-                        ucdays.eventContain(item.getTitle());
-                        ucdays.hoverDescription(item.getDescription() + " @ " + item.getTime());
-                    }
-                }
-                daycontainer.Controls.Add(ucdays);
-            }
-
-           
+            
         }
 
         private void deleteButton_Click(object sender, EventArgs e)
@@ -246,7 +176,7 @@ namespace Event_Planner
             dataGridView1.Rows.Clear();
             foreach (Event item in eventCollection)
             {
-                int i = 0;
+                
                 String title = item.getTitle();
                 String description = item.getDescription();
                 String date = item.getStartDate();
@@ -299,6 +229,50 @@ namespace Event_Planner
                 }
                 daycontainer.Controls.Add(ucdays);
             }
+            calendarDesigner(month);
+        }
+        private void calendarDesigner(int month)
+        {
+            var BG = this;
+            
+            var xmas = Event_Planner.Properties.Resources.christmasBetter;
+            var thanksgiving = Event_Planner.Properties.Resources.Thanksgiving;
+            var holloween = Event_Planner.Properties.Resources.Holloween;
+            var spring = Event_Planner.Properties.Resources.spring;
+            var summer = Event_Planner.Properties.Resources.summer;
+            var winter = Event_Planner.Properties.Resources.winter;
+            var fall = Event_Planner.Properties.Resources.fall;
+
+
+            if (month == 12)
+            {
+                BG.BackgroundImage = xmas;
+
+            } else if (month == 11)
+            {
+                BG.BackgroundImage = thanksgiving;
+
+            } else if (month == 10)
+            {
+                BG.BackgroundImage = holloween;
+
+            } else if (month == 6 | month == 7 | month == 8)
+            {
+                BG.BackgroundImage = summer;
+
+            } else if (month == 3 | month == 4 | month == 5)
+            {
+                BG.BackgroundImage = spring;
+
+            } else if (month == 1 | month == 2)
+            {
+                BG.BackgroundImage = winter;
+
+            } else if (month == 9)
+            {
+                BG.BackgroundImage = fall;
+            }
+
         }
     }
 
